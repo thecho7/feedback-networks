@@ -25,3 +25,4 @@ clear and has sufficient instructions to be able to reproduce the issue.
 ## License
 By contributing to fb.resnet.torch, you agree that your contributions will be
 licensed under its BSD license.
+
