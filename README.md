@@ -66,5 +66,5 @@ This implementation differs from the ResNet paper in a few ways:
 The repo of Feedback Networks
 http://feedbacknet.stanford.edu/ .
 
-Feedback Networks Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Jitendra Malik, Silvio Savarese 
+Feedback Networks Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese 
 >>>>>>> 732f239d6e371f30b62f2a6f5759accd46f85387
