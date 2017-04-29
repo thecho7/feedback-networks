@@ -70,3 +70,5 @@ This implementation differs from the ResNet paper in a few ways:
 **Strided convolution**: When using the bottleneck architecture, we use stride 2 in the 3x3 convolution, instead of the first 1x1 convolution.
  
  
+ 
+ 
