@@ -1,5 +1,8 @@
-<<<<<<< HEAD
-ResNet training in Torch
+This repository is in development mode. It will be cleaned up for public use within the next couple of weeks.
+============================
+
+
+## ResNet training in Torch
 ============================
 
 This implements training of residual networks from [Deep Residual Learning for Image Recognition](http://arxiv.org/abs/1512.03385) by Kaiming He, et. al.
