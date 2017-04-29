@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-ResNet training in Torch
+## ResNet training in Torch
 ============================
 
 This implements training of residual networks from [Deep Residual Learning for Image Recognition](http://arxiv.org/abs/1512.03385) by Kaiming He, et. al.
