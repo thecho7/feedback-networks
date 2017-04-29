@@ -1,9 +1,9 @@
 << This repository is in development mode. It will be cleaned up for public use within the next couple of weeks. >>
 
 
-# The repo of Feedback Networks http://feedbacknet.stanford.edu/ 
+# Feedback Networks http://feedbacknet.stanford.edu/ 
 
-Feedback Networks, CVPR 2016.
+Paper: Feedback Networks, CVPR 2016.
 Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese 
 
 ## ResNet training in Torch
