@@ -6,10 +6,8 @@
 Paper: Feedback Networks, CVPR 2016.
 Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese 
 
-## ResNet training in Torch
+## Feedback Networks training in Torch
 ============================
-
-This implements training of residual networks from [Deep Residual Learning for Image Recognition](http://arxiv.org/abs/1512.03385) by Kaiming He, et. al.
 
 ## Requirements
 See the [installation instructions](INSTALL.md) for a step-by-step guide.
