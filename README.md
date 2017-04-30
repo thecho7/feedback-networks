@@ -16,7 +16,7 @@ See the [installation instructions](INSTALL.md) for a step-by-step guide.
 - Install [Torch](http://torch.ch/docs/getting-started.html) on a machine with CUDA GPU
 - Install [cuDNN v4 or v5](https://developer.nvidia.com/cudnn) and the Torch [cuDNN bindings](https://github.com/soumith/cudnn.torch/tree/R4)
 - Install [rnn](https://github.com/Element-Research/rnn) the Element-Research RNN library for Torch
-- Download the [CIFAR10/100](https://www.cs.toronto.edu/~kriz/cifar.html) dataset and put it under folder gen/
+- Download the [CIFAR10/100](https://www.cs.toronto.edu/~kriz/cifar.html) dataset (binary file) and put it under folder gen/
 
 If you already have Torch installed, update `nn`, `cunn`, and `cudnn`.
 
