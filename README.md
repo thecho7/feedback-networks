@@ -32,5 +32,3 @@ th main.lua -seqLength [number of feedback iterations] -sequenceOut [true for fe
 ```
 To run the testing, simply assign a directory of where the checkpoints are saved and turn of the testOnly flag by -testOnly 'true'
 
-
-
