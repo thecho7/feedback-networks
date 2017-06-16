@@ -37,9 +37,13 @@ To run the testing, simply assign a directory of where the checkpoints are saved
 
 ## Using your own criterion
 
-You can write your own criterion and store in under the directory lib, and require them in the models/init.lua
+You can write your own criterion and store it under the directory lib/, and require them in the models/init.lua
 Add another options in the opts.lua to use them while running a script, for example
 ```lua
 cmd:option('-coarsefine', 'false', 'If using this criterion or not')
 opt.coarsefine = opt.coarsefine ~= 'false'
+```
+In the bash script add
+```bash
+-coarsefine 'true'
 ```
