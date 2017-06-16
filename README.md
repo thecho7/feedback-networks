@@ -19,6 +19,7 @@ See the [installation instructions](INSTALL.md) for a step-by-step guide.
 If you already have Torch installed, update `nn`, `cunn`, and `cudnn`.
 
 ## Training
+
 The training scripts come with several options, which can be listed with the `--help` flag.
 ```bash
 th main.lua --help
@@ -31,9 +32,11 @@ th main.lua -seqLength [number of feedback iterations] -sequenceOut [true for fe
 ```
 
 ## Testing
+
 To run the testing, simply assign a directory of where the checkpoints are saved and turn of the testOnly flag by -testOnly 'true'
 
 ## Using your own criterion
+
 You can write your own criterion and store in under the directory lib, and require them in the models/init.lua
 Add another options in the opts.lua to use them while running a script, for example
 ```lua
