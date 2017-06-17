@@ -10,7 +10,7 @@ Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Ma
 ============================
 
 ## Requirements
-Code adopted and modified from [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch)
+Code adopted and modified from [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 See the [installation instructions](INSTALL.md) for a step-by-step guide.
 - Install [Torch](http://torch.ch/docs/getting-started.html) on a machine with CUDA GPU
 - Install [cuDNN v4 or v5](https://developer.nvidia.com/cudnn) and the Torch [cuDNN bindings](https://github.com/soumith/cudnn.torch/tree/R4)
