@@ -11,9 +11,10 @@
 
 local nn = require 'nn'
 require 'cunn'
-require 'lib/ConvLSTM_bn3resSkip4'
+require 'ConvLSTM_bn3res'
 require 'cunn'
 require 'rnn'
+local checkpoints = require 'checkpoints'
 
 local Convolution = cudnn.SpatialConvolution
 local Avg = cudnn.SpatialAveragePooling
@@ -187,7 +188,7 @@ local function createModel(opt)
       local n = (depth - 2) / 6
       local N = opt.batchSize
       iChannels = 16
-      T = 4
+      T = 8
       D = iChannels
       print(' | ResNet-' .. depth .. ' CIFAR-100')
 
@@ -202,11 +203,11 @@ local function createModel(opt)
       model:add(nn.View(T, -1, D, 32, 32))
       model:add(nn.SplitTable(1))
 
-      model:add(nn.Sequencer(nn.ConvLSTM_bn3resSkip4(16, 16, T, 3, 3, 1, N/opt.nGPU)))
+      model:add(nn.Sequencer(nn.ConvLSTM_bn3res(16, 16, T, 3, 3, 1, N/opt.nGPU)))
       model:add(nn.Sequencer(nn.ConvLSTM_bn3res(16, 32, T, 3, 3, 2, N/opt.nGPU)))
       model:add(nn.Sequencer(nn.ConvLSTM_bn3res(32, 64, T, 3, 3, 2, N/opt.nGPU)))
-      model:add(nn.Sequencer(nn.ConvLSTM_bn3resSkip4(64, 64, T, 3, 3, 1, N/opt.nGPU)))
-      -- model:add(nn.Sequencer(nn.ReLU(true)))
+      model:add(nn.Sequencer(nn.ConvLSTM_bn3res(64, 64, T, 3, 3, 1, N/opt.nGPU)))
+      model:add(nn.Sequencer(nn.ReLU(true)))
 
       model:add(nn.Sequencer(Avg(8, 8, 1, 1)))
       model:add(nn.Sequencer(nn.View(64):setNumInputDims(3)))
@@ -251,6 +252,41 @@ local function createModel(opt)
    end
 
    model:get(1).gradInput = nil
+
+   -- For testing purpose only
+   if opt.testOnly then
+      print ("[Test phase]")
+      local checkpoint, optimState = checkpoints.latest(opt)
+      local modelPath = paths.concat(opt.resume, checkpoint.modelFile)
+      trained_model = torch.load(modelPath)
+   end
+   if opt.testOnly then
+     model = trained_model:clone('weight', 'bias')
+     model:replace(function(module)
+       if torch.typename(module) == 'nn.Replicate' then
+         return nn.Replicate(opt.seqLength)
+       else
+         return module
+       end
+     end)
+     model:replace(function(module)
+       if torch.typename(module) == 'nn.View' then
+         if #module.size == 5 then
+           if module.size[3] == 16 then
+             return nn.View(opt.seqLength, -1, 16, 32, 32)
+           elseif module.size[3] == 32 then
+             return nn.View(opt.seqLength, -1, 32, 32, 32)
+           elseif module.size[3] == 64 then
+             return nn.View(opt.seqLength, -1, 64, 8, 8)
+           end
+         else
+           return module
+         end
+       else
+         return module
+       end
+     end)
+   end
 
    return model
 end

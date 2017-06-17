@@ -1,3 +1,4 @@
 gen/*
 checkpoints_*
 log*
+pretrained/t7s

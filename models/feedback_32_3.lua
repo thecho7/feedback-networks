@@ -11,10 +11,9 @@
 
 local nn = require 'nn'
 require 'cunn'
-require 'ConvLSTM_bn2'
+require 'lib/ConvLSTM_bn2'
 require 'cunn'
 require 'rnn'
-local checkpoints = require 'checkpoints'
 
 local Convolution = cudnn.SpatialConvolution
 local Avg = cudnn.SpatialAveragePooling
@@ -188,7 +187,7 @@ local function createModel(opt)
       local n = (depth - 2) / 6
       local N = opt.batchSize
       iChannels = 16
-      T = 8
+      T = opt.seqLength
       D = iChannels
       print(' | ResNet-' .. depth .. ' CIFAR-100')
 
@@ -214,6 +213,7 @@ local function createModel(opt)
       -- model:add(nn.Mean(1))
       -- model:add(nn.Squeeze(1))
 
+      model:add(nn.Sequencer(nn.ReLU(true)))
       model:add(nn.Sequencer(Avg(8, 8, 1, 1)))
       -- model:add(Max(8, 8))
       -- model:add(nn.View(64):setNumInputDims(3))
@@ -260,7 +260,7 @@ local function createModel(opt)
    end
 
    model:get(1).gradInput = nil
-
+  
    -- for testing purpose only
    if opt.testOnly then
       print ("[Test phase]")
@@ -293,7 +293,7 @@ local function createModel(opt)
        end
      end)
    end
-   
+
    return model
 end
 

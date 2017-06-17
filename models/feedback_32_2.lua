@@ -261,6 +261,40 @@ local function createModel(opt)
 
    model:get(1).gradInput = nil
 
+   -- for testing purpose only
+   if opt.testOnly then
+      print ("[Test phase]")
+      local checkpoint, optimState = checkpoints.latest(opt)
+      local modelPath = paths.concat(opt.resume, checkpoint.modelFile)
+      trained_model = torch.load(modelPath)
+   end
+   if opt.testOnly then
+     model = trained_model:clone('weight', 'bias')
+     model:replace(function(module)
+       if torch.typename(module) == 'nn.Replicate' then
+         return nn.Replicate(opt.seqLength)
+       else
+         return module
+       end
+     end)
+     model:replace(function(module)
+       if torch.typename(module) == 'nn.View' then
+         if #module.size == 5 then
+           if module.size[3] == D then
+             return nn.View(opt.seqLength, -1, D, 32, 32)
+           elseif module.size[3] == 64 then
+             return nn.View(opt.seqLength, -1, 64, 8, 8)
+           end
+         else
+           return module
+         end
+       else
+         return module
+       end
+     end)
+   end
+
+
    return model
 end
 

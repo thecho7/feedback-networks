@@ -11,7 +11,7 @@
 
 local nn = require 'nn'
 require 'cunn'
-require 'ConvLSTM_bn2'
+require 'ConvLSTM_resnet5X3'
 require 'cunn'
 require 'rnn'
 local checkpoints = require 'checkpoints'
@@ -203,21 +203,13 @@ local function createModel(opt)
       model:add(nn.View(T, -1, D, 32, 32))
       model:add(nn.SplitTable(1))
 
-      model:add(nn.Sequencer(nn.ConvLSTM_bn2(16, 32, T, 3, 3, 2, N/opt.nGPU)))
-      model:add(nn.Sequencer(nn.ConvLSTM_bn2(32, 32, T, 3, 3, 1, N/opt.nGPU)))
-      model:add(nn.Sequencer(nn.ConvLSTM_bn2(32, 64, T, 3, 3, 2, N/opt.nGPU)))
-      model:add(nn.Sequencer(nn.ConvLSTM_bn2(64, 64, T, 3, 3, 1, N/opt.nGPU)))
-      -- model:add(nn.SelectTable(-1))
-
-      -- model:add(nn.JoinTable(1))
-      -- model:add(nn.View(T, -1, 64, 8, 8))
-      -- model:add(nn.Mean(1))
-      -- model:add(nn.Squeeze(1))
+      model:add(nn.Sequencer(nn.ConvLSTM_resnet5X3(16, 16, T, 3, 3, 1, N/opt.nGPU)))
+      model:add(nn.Sequencer(nn.ConvLSTM_resnet5X3(16, 32, T, 3, 3, 2, N/opt.nGPU)))
+      model:add(nn.Sequencer(nn.ConvLSTM_resnet5X3(32, 64, T, 3, 3, 2, N/opt.nGPU)))
+      model:add(nn.Sequencer(nn.ConvLSTM_resnet5X3(64, 64, T, 3, 3, 1, N/opt.nGPU)))
+      -- model:add(nn.Sequencer(nn.ReLU(true)))
 
       model:add(nn.Sequencer(Avg(8, 8, 1, 1)))
-      -- model:add(Max(8, 8))
-      -- model:add(nn.View(64):setNumInputDims(3))
-      -- model:add(nn.Linear(64, 100))
       model:add(nn.Sequencer(nn.View(64):setNumInputDims(3)))
       model:add(nn.Sequencer(nn.Linear(64, 100)))
    else
@@ -261,7 +253,7 @@ local function createModel(opt)
 
    model:get(1).gradInput = nil
 
-   -- for testing purpose only
+   -- For testing purpose only
    if opt.testOnly then
       print ("[Test phase]")
       local checkpoint, optimState = checkpoints.latest(opt)
@@ -280,8 +272,10 @@ local function createModel(opt)
      model:replace(function(module)
        if torch.typename(module) == 'nn.View' then
          if #module.size == 5 then
-           if module.size[3] == D then
-             return nn.View(opt.seqLength, -1, D, 32, 32)
+           if module.size[3] == 16 then
+             return nn.View(opt.seqLength, -1, 16, 32, 32)
+           elseif module.size[3] == 32 then
+             return nn.View(opt.seqLength, -1, 32, 32, 32)
            elseif module.size[3] == 64 then
              return nn.View(opt.seqLength, -1, 64, 8, 8)
            end
@@ -293,7 +287,7 @@ local function createModel(opt)
        end
      end)
    end
-   
+
    return model
 end
 
