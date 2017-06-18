@@ -11,7 +11,7 @@
 
 local nn = require 'nn'
 require 'cunn'
-require 'ConvLSTM_bn2'
+require 'lib/ConvLSTM_bn2'
 require 'cunn'
 require 'rnn'
 local checkpoints = require 'checkpoints'

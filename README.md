@@ -52,3 +52,12 @@ In the bash script add
 ```bash
 -coarsefine 'true'
 ```
+
+## Writing your own model
+
+You can develop your own model and store in under models/, as an exmaple model of ours, models/feedback_48.lua
+Modify the code below the following lines within the code block, and set the netType in your running bash script or command:
+```lua
+elseif opt.dataset == 'cifar100' then
+   -- Model type specifies number of layers for CIFAR-100 model
+```

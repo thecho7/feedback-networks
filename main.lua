@@ -49,11 +49,12 @@ for epoch = startEpoch, opt.nEpochs do
 
    if epoch == 20 or epoch == '20' then
       -- local modelPath = paths.concat(opt.save, checkpoints.modelFile)
-      local modelPath = paths.concat(opt.save, 'model_' .. epoch-1 ..'.t7')
-      assert(paths.filep(modelPath), 'Saved model not found: ' .. modelPath)
-      print('=> Resuming model from ' .. modelPath)
-      trainer.model = torch.load(modelPath):cuda()
-      trainer.params, trainer.gradParams = trainer.model:getParameters()
+      --
+      -- local modelPath = paths.concat(opt.save, 'model_' .. epoch-1 ..'.t7')
+      -- assert(paths.filep(modelPath), 'Saved model not found: ' .. modelPath)
+      -- print('=> Resuming model from ' .. modelPath)
+      -- trainer.model = torch.load(modelPath):cuda()
+      -- trainer.params, trainer.gradParams = trainer.model:getParameters()
    end
 
    -- Train for a single epoch

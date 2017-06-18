@@ -11,7 +11,7 @@
 
 local nn = require 'nn'
 require 'cunn'
-require 'ConvLSTM_resnet5X3'
+require 'lib/ConvLSTM_resnet5X3'
 require 'cunn'
 require 'rnn'
 local checkpoints = require 'checkpoints'
@@ -188,7 +188,7 @@ local function createModel(opt)
       local n = (depth - 2) / 6
       local N = opt.batchSize
       iChannels = 16
-      T = 8
+      T = 4
       D = iChannels
       print(' | ResNet-' .. depth .. ' CIFAR-100')
 
