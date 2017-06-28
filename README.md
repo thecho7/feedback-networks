@@ -64,4 +64,3 @@ elseif opt.dataset == 'cifar100' then
 ```
 
 
-
