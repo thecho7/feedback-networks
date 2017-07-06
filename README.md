@@ -62,3 +62,4 @@ to the name of the model you develop:
 elseif opt.dataset == 'cifar100' then
    -- Model type specifies number of layers for CIFAR-100 model
 ```
+
