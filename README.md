@@ -4,6 +4,7 @@
 # Feedback Networks http://feedbacknet.stanford.edu/ 
 
 Paper: Feedback Networks, CVPR 2017.
+
 Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese. 
 
 ## Feedback Networks training in Torch
