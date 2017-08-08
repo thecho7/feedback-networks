@@ -1,10 +1,11 @@
-<< This repository is in development mode. It will be cleaned up for public use within the next couple of weeks. >>
+
 
 
 # Feedback Networks http://feedbacknet.stanford.edu/ 
 
-Paper: Feedback Networks, CVPR 2016.
-Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese 
+Paper: Feedback Networks, CVPR 2017.
+
+Amir R. Zamir*,Te-Lin Wu*, Lin Sun, William B. Shen, Bertram E. Shi, Jitendra Malik, Silvio Savarese. 
 
 ## Feedback Networks training in Torch
 ============================
@@ -62,4 +63,5 @@ to the name of the model you develop:
 elseif opt.dataset == 'cifar100' then
    -- Model type specifies number of layers for CIFAR-100 model
 ```
+
 
