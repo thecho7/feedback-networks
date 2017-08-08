@@ -184,7 +184,7 @@ function M.setup(opt, checkpoint)
          :threads(function()
             local cudnn = require 'cudnn'
             require 'rnn'
-            require 'lib/ConvLSTM_bn'
+            require 'ConvLSTM_bn'
             require 'lib/ConvLSTM_bn2'
             require 'lib/ConvLSTM_bn3'
             require 'lib/ConvLSTM_bn3res'
