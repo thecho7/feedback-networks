@@ -27,7 +27,7 @@ cutorch.manualSeedAll(opt.manualSeed)
 local checkpoint, optimState = checkpoints.latest(opt)
 
 -- Create model
-local model, criterion = models.setup(opt, checkpoint)
+local model, criterion = models.setup(opt, checkpoint) -- models/init.lua : setup(opt, checkpoint)
 print(model)
 
 -- Data loading
